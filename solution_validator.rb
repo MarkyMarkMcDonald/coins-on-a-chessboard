@@ -23,7 +23,7 @@ class SolutionValidator
     @board_length = board_length
   end
 
-  def solve(solution)
+  def valid?(solution)
     possible_boards.all? do |board|
       check(board, solution)
     end
