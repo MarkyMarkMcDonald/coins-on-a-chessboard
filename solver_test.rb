@@ -1,4 +1,4 @@
 require_relative './solver.rb'
-board = 0b1010
-puts "possible moves for #{board.to_s(2)} are #{possible_moves(board)}"
-raise "possible moves incorrect" unless possible_moves(board) == [1, -2, 4, -8, 0]
+board = Board.new(value: 0b0010, spaces: 4)
+puts "possible moves for #{board} are #{board.possible_moves}"
+raise "possible moves incorrect" unless board.possible_moves == [1, -2, 4, 8]
