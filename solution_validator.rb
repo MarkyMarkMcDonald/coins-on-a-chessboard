@@ -18,7 +18,7 @@ class Board
   end
 end
 
-class Solver
+class SolutionValidator
   def initialize(board_length:)
     @board_length = board_length
   end
