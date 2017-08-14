@@ -6,10 +6,13 @@ class Board
     @spaces = spaces
   end
 
-  def possible_moves
-    to_s.chars.reverse.map.with_index do |coin, index|
+  def next_boards
+    moves = to_s.chars.reverse.map.with_index do |coin, index|
       direction = coin === '1' ? -1 : 1
       (2 ** index) * direction
+    end
+    moves.map do |move|
+      Board.new(value: @value + move, spaces: @spaces)
     end
   end
 
@@ -37,11 +40,11 @@ class SolutionValidator
     end
   end
 
+  # The solution indicates an index on the board given the board's value.
+  # returns true if every index on the board can be indicated by the solution
+  # for at least one of the possible next boards
   def check(board, solution)
-    boards_with_moves = board.possible_moves.map do |move|
-      Board.new(value: board.value + move, spaces: @board_length)
-    end
-    available_indications = boards_with_moves.map do |board_with_move|
+    available_indications = board.next_boards.map do |board_with_move|
       solution.call(board_with_move)
     end
     required_indications = (0..(@board_length - 1)).to_a
