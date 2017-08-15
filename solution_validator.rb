@@ -1,25 +1,4 @@
-class Board
-  attr_accessor :value
-
-  def initialize(value:, spaces:)
-    @value = value
-    @spaces = spaces
-  end
-
-  def next_boards
-    moves = to_s.chars.reverse.map.with_index do |coin, index|
-      direction = coin === '1' ? -1 : 1
-      (2 ** index) * direction
-    end
-    moves.map do |move|
-      Board.new(value: @value + move, spaces: @spaces)
-    end
-  end
-
-  def to_s
-    @value.to_s(2).rjust(@spaces, '0')
-  end
-end
+require_relative './board'
 
 class SolutionValidator
   def initialize(board_length:)
@@ -36,7 +15,7 @@ class SolutionValidator
 
   def possible_boards
     (0..(2**@board_length - 1)).map do |board_values|
-      Board.new(value: board_values, spaces: @board_length)
+      Board.new(value: board_values, size: @board_length)
     end
   end
 
