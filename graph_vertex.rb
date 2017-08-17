@@ -3,10 +3,8 @@ class GraphVertex
   attr_accessor :color
   attr_accessor :edges
 
-  initialize(value) do
+  def initialize(value:)
     @value = value
     @edges = []
   end
-
-
 end
